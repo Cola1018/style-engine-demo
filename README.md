@@ -1,6 +1,6 @@
 # Style Engine — one brief, eight websites
 
-**[Open the live demo →](PAGES_URL)**
+**[Open the live demo →](https://cola1018.github.io/style-engine-demo/)**
 
 ![Eight design directions rendering the same content file](cover-contact-sheet.png)
 
