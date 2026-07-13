@@ -1,0 +1,1489 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<title>Style Engine — contact sheet</title>
+<style>
+  :root {
+    --paper: #E7E9EC;
+    --surface: #FBFCFD;
+    --surface-sunk: #DDE0E5;
+    --rule: #C3C8D0;
+    --rule-soft: #D6DAE0;
+    --ink: #16191F;
+    --ink-muted: #5B6472;
+    --ink-faint: #8C95A3;
+    --blue: #2B4C7E;
+    --blue-deep: #1D3557;
+    --marker: #E8B931;
+    --grid: rgba(43, 76, 126, 0.07);
+
+    --mono: ui-monospace, "Cascadia Mono", "SF Mono", "Roboto Mono", Consolas, monospace;
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+    --step--1: 0.72rem;
+    --step-0: 0.84rem;
+    --step-1: 1rem;
+    --step-2: 1.35rem;
+    --step-3: 2rem;
+    --step-4: 2.9rem;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --paper: #14171B;
+      --surface: #1C2026;
+      --surface-sunk: #0F1215;
+      --rule: #333A44;
+      --rule-soft: #262C34;
+      --ink: #E6E9ED;
+      --ink-muted: #98A2B0;
+      --ink-faint: #6B7484;
+      --blue: #7FA8DC;
+      --blue-deep: #A9C6E8;
+      --marker: #E8B931;
+      --grid: rgba(127, 168, 220, 0.07);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --paper: #14171B;
+    --surface: #1C2026;
+    --surface-sunk: #0F1215;
+    --rule: #333A44;
+    --rule-soft: #262C34;
+    --ink: #E6E9ED;
+    --ink-muted: #98A2B0;
+    --ink-faint: #6B7484;
+    --blue: #7FA8DC;
+    --blue-deep: #A9C6E8;
+    --marker: #E8B931;
+    --grid: rgba(127, 168, 220, 0.07);
+  }
+
+  :root[data-theme="light"] {
+    --paper: #E7E9EC;
+    --surface: #FBFCFD;
+    --surface-sunk: #DDE0E5;
+    --rule: #C3C8D0;
+    --rule-soft: #D6DAE0;
+    --ink: #16191F;
+    --ink-muted: #5B6472;
+    --ink-faint: #8C95A3;
+    --blue: #2B4C7E;
+    --blue-deep: #1D3557;
+    --marker: #E8B931;
+    --grid: rgba(43, 76, 126, 0.07);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background-color: var(--paper);
+    background-image:
+      linear-gradient(var(--grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+    background-size: 22px 22px;
+    color: var(--ink);
+    font-family: var(--mono);
+    font-size: var(--step-0);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .shell {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 28px 24px 64px;
+  }
+
+  /* ── masthead ─────────────────────────────── */
+
+  .masthead {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 18px;
+  }
+
+  .masthead h1 {
+    margin: 0;
+    font-size: var(--step-4);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    text-wrap: balance;
+  }
+
+  .masthead h1 em {
+    font-style: normal;
+    color: var(--blue);
+  }
+
+  .lede {
+    margin: 10px 0 0;
+    max-width: 56ch;
+    color: var(--ink-muted);
+    font-size: var(--step-0);
+  }
+
+  .spec {
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 2px 14px;
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+    align-content: end;
+  }
+
+  .spec dt {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+  }
+
+  .spec dd {
+    margin: 0;
+    color: var(--ink);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .disclosure {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 14px;
+    padding: 4px 10px;
+    border: 1px solid var(--marker);
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--marker) 14%, transparent);
+    font-size: var(--step--1);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .disclosure::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: var(--marker);
+  }
+
+  /* ── thesis strip ─────────────────────────── */
+
+  .thesis {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    gap: 1px;
+    margin-top: 26px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .thesis > div {
+    background: var(--surface);
+    padding: 14px 16px;
+  }
+
+  .thesis .k {
+    display: block;
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--ink-faint);
+  }
+
+  .thesis .v {
+    display: block;
+    margin-top: 5px;
+    font-size: var(--step-1);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .thesis .n {
+    display: block;
+    margin-top: 3px;
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+    line-height: 1.4;
+  }
+
+  /* ── console ──────────────────────────────── */
+
+  .console {
+    display: grid;
+    grid-template-columns: 232px minmax(0, 1fr) 268px;
+    gap: 18px;
+    margin-top: 26px;
+    align-items: start;
+  }
+
+  @media (max-width: 1180px) {
+    .console { grid-template-columns: 200px minmax(0, 1fr); }
+    .tokens { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 780px) {
+    .console { grid-template-columns: 1fr; }
+  }
+
+  .panel {
+    border: 1px solid var(--rule);
+    background: var(--surface);
+  }
+
+  .panel-hd {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 9px 12px;
+    border-bottom: 1px solid var(--rule);
+    background: var(--surface-sunk);
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--ink-muted);
+  }
+
+  .panel-hd b {
+    color: var(--ink);
+    font-weight: 600;
+  }
+
+  /* selector */
+
+  .styles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .styles li + li { border-top: 1px solid var(--rule-soft); }
+
+  .styles button {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 12px;
+    border: 0;
+    background: transparent;
+    font: inherit;
+    color: var(--ink);
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .styles button:hover { background: var(--surface-sunk); }
+
+  .styles button:focus-visible {
+    outline: 2px solid var(--blue);
+    outline-offset: -2px;
+  }
+
+  .styles button[aria-pressed="true"] {
+    background: var(--blue);
+    color: #fff;
+  }
+
+  :root[data-theme="dark"] .styles button[aria-pressed="true"],
+  .styles button[aria-pressed="true"] { color: var(--surface); }
+
+  .styles .chip {
+    display: flex;
+    width: 34px;
+    height: 22px;
+    border: 1px solid rgba(0, 0, 0, 0.28);
+  }
+
+  .styles .chip i { flex: 1; }
+
+  .styles .nm {
+    display: block;
+    font-size: var(--step-0);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .styles .ds {
+    display: block;
+    font-size: var(--step--1);
+    opacity: 0.72;
+    line-height: 1.35;
+  }
+
+  .styles button[aria-pressed="true"] .ds { opacity: 0.85; }
+
+  .selector-foot {
+    display: flex;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .btn {
+    flex: 1;
+    padding: 7px 10px;
+    border: 1px solid var(--ink);
+    background: transparent;
+    color: var(--ink);
+    font: inherit;
+    font-size: var(--step--1);
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    cursor: pointer;
+  }
+
+  .btn:hover { background: var(--ink); color: var(--surface); }
+  .btn:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  .hint {
+    padding: 0 12px 11px;
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+    line-height: 1.4;
+  }
+
+  .hint kbd {
+    display: inline-block;
+    padding: 0 4px;
+    border: 1px solid var(--rule);
+    border-bottom-width: 2px;
+    border-radius: 2px;
+    background: var(--surface-sunk);
+    font: inherit;
+    font-size: 0.92em;
+    color: var(--ink-muted);
+  }
+
+  /* stage */
+
+  .stage-wrap { min-width: 0; }
+
+  .stage-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border: 1px solid var(--rule);
+    border-bottom: 0;
+    background: var(--surface-sunk);
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+  }
+
+  .dots { display: flex; gap: 5px; }
+  .dots i {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--rule);
+  }
+
+  .url {
+    flex: 1;
+    min-width: 0;
+    padding: 3px 9px;
+    border: 1px solid var(--rule);
+    border-radius: 2px;
+    background: var(--surface);
+    color: var(--ink-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .stage {
+    border: 1px solid var(--rule);
+    overflow: hidden;
+    container-type: inline-size;
+  }
+
+  /* tokens */
+
+  .tokens { position: sticky; top: 18px; }
+
+  .token-body { padding: 12px; }
+
+  .swatches {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .swatches figure {
+    margin: 0;
+    background: var(--surface);
+  }
+
+  .swatches .sw {
+    height: 34px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .swatches figcaption {
+    padding: 3px 2px;
+    font-size: 0.62rem;
+    text-align: center;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    overflow: hidden;
+  }
+
+  .token-list {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 1px 0;
+    margin: 12px 0 0;
+    font-size: var(--step--1);
+  }
+
+  .token-list dt {
+    padding: 5px 8px 5px 0;
+    color: var(--ink-faint);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px dotted var(--rule-soft);
+  }
+
+  .token-list dd {
+    margin: 0;
+    padding: 5px 0;
+    text-align: right;
+    color: var(--ink);
+    border-bottom: 1px dotted var(--rule-soft);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .rationale {
+    margin: 12px 0 0;
+    padding: 10px;
+    border-left: 2px solid var(--marker);
+    background: var(--surface-sunk);
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .rationale b {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--ink);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    font-size: 0.66rem;
+  }
+
+  /* ── pipeline ─────────────────────────────── */
+
+  .pipeline {
+    margin-top: 34px;
+    border-top: 2px solid var(--ink);
+    padding-top: 20px;
+  }
+
+  .pipeline h2 {
+    margin: 0 0 4px;
+    font-size: var(--step-2);
+    letter-spacing: -0.02em;
+  }
+
+  .pipeline > p {
+    margin: 0 0 20px;
+    max-width: 62ch;
+    color: var(--ink-muted);
+  }
+
+  .flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .flow article {
+    background: var(--surface);
+    padding: 14px 15px;
+  }
+
+  .flow .st {
+    display: block;
+    font-size: 0.66rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--blue);
+  }
+
+  .flow h3 {
+    margin: 6px 0 5px;
+    font-size: var(--step-1);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .flow p {
+    margin: 0;
+    font-size: var(--step--1);
+    color: var(--ink-muted);
+    line-height: 1.5;
+  }
+
+  .flow code {
+    font-family: var(--mono);
+    padding: 0 3px;
+    background: var(--surface-sunk);
+    border: 1px solid var(--rule-soft);
+    font-size: 0.92em;
+  }
+
+  .colophon {
+    margin-top: 26px;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 26px;
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+  }
+
+  .colophon b { color: var(--ink-muted); font-weight: 600; }
+
+  /* ══════════════════════════════════════════════════════
+     THE SAMPLES — every site below renders the same
+     content object; only the token set changes.
+     ══════════════════════════════════════════════════════ */
+
+  .site {
+    --pad: 40px;
+    padding: var(--pad);
+    background: var(--s-bg);
+    color: var(--s-ink);
+    font-family: var(--s-body);
+    transition: background-color 0.28s ease, color 0.28s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .site, .site * { transition: none !important; animation: none !important; }
+  }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 22px;
+    border-bottom: var(--s-hair);
+  }
+
+  .site-logo {
+    font-family: var(--s-display);
+    font-size: 1.18rem;
+    font-weight: var(--s-logo-weight, 700);
+    letter-spacing: var(--s-logo-track, -0.02em);
+    text-transform: var(--s-logo-case, none);
+    color: var(--s-accent);
+  }
+
+  .site-links {
+    display: flex;
+    gap: 20px;
+    font-size: 0.78rem;
+    letter-spacing: var(--s-nav-track, 0);
+    text-transform: var(--s-nav-case, none);
+    color: var(--s-muted);
+  }
+
+  @container (max-width: 560px) {
+    .site-links { display: none; }
+    .site { --pad: 24px; }
+  }
+
+  .site-hero {
+    padding: var(--s-hero-pad, 52px) 0 var(--s-hero-pad, 52px);
+  }
+
+  .site-eyebrow {
+    display: inline-block;
+    margin-bottom: 16px;
+    padding: var(--s-eyebrow-pad, 4px 10px);
+    border: var(--s-eyebrow-border, 1px solid currentColor);
+    border-radius: var(--s-radius-pill, 999px);
+    background: var(--s-eyebrow-bg, transparent);
+    color: var(--s-eyebrow-ink, var(--s-accent));
+    font-family: var(--s-ui, var(--s-body));
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .site-hero h2 {
+    margin: 0;
+    max-width: var(--s-measure, 17ch);
+    font-family: var(--s-display);
+    font-size: var(--s-h1, 3.4rem);
+    font-weight: var(--s-h1-weight, 700);
+    line-height: var(--s-h1-leading, 1.02);
+    letter-spacing: var(--s-h1-track, -0.035em);
+    text-transform: var(--s-h1-case, none);
+    text-wrap: balance;
+    color: var(--s-heading, var(--s-ink));
+  }
+
+  .site-hero p {
+    margin: 20px 0 28px;
+    max-width: 46ch;
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--s-muted);
+  }
+
+  .site-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .site-btn {
+    display: inline-block;
+    padding: var(--s-btn-pad, 13px 26px);
+    border: var(--s-btn-border, 0);
+    border-radius: var(--s-radius, 6px);
+    background: var(--s-accent);
+    box-shadow: var(--s-btn-shadow, none);
+    color: var(--s-on-accent, #fff);
+    font-family: var(--s-ui, var(--s-body));
+    font-size: 0.85rem;
+    font-weight: var(--s-btn-weight, 600);
+    letter-spacing: var(--s-btn-track, 0);
+    text-transform: var(--s-btn-case, none);
+    cursor: pointer;
+  }
+
+  .site-btn.ghost {
+    background: transparent;
+    box-shadow: none;
+    border: var(--s-hair);
+    color: var(--s-ink);
+  }
+
+  .site-proof {
+    font-size: 0.75rem;
+    color: var(--s-faint, var(--s-muted));
+  }
+
+  .site-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-gap, 18px);
+    padding: 34px 0;
+    border-top: var(--s-hair);
+  }
+
+  @container (max-width: 640px) {
+    .site-grid { grid-template-columns: 1fr; }
+  }
+
+  .site-card {
+    padding: var(--s-card-pad, 22px);
+    border: var(--s-card-border, none);
+    border-radius: var(--s-radius, 6px);
+    background: var(--s-card-bg, transparent);
+    box-shadow: var(--s-card-shadow, none);
+  }
+
+  .site-card .no {
+    display: block;
+    margin-bottom: 10px;
+    font-family: var(--s-ui, var(--s-display));
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    color: var(--s-accent);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .site-card h3 {
+    margin: 0 0 7px;
+    font-family: var(--s-display);
+    font-size: 1.08rem;
+    font-weight: var(--s-h3-weight, 600);
+    letter-spacing: var(--s-h3-track, -0.01em);
+    text-transform: var(--s-h3-case, none);
+    color: var(--s-heading, var(--s-ink));
+  }
+
+  .site-card p {
+    margin: 0;
+    font-size: 0.86rem;
+    line-height: 1.6;
+    color: var(--s-muted);
+  }
+
+  .site-quote {
+    padding: 30px 0 0;
+    border-top: var(--s-hair);
+  }
+
+  .site-quote blockquote {
+    margin: 0;
+    max-width: 44ch;
+    font-family: var(--s-display);
+    font-size: var(--s-quote, 1.5rem);
+    font-weight: var(--s-quote-weight, 500);
+    font-style: var(--s-quote-style, normal);
+    line-height: 1.35;
+    letter-spacing: -0.015em;
+    color: var(--s-heading, var(--s-ink));
+    text-wrap: balance;
+  }
+
+  .site-quote figcaption {
+    margin-top: 14px;
+    font-size: 0.78rem;
+    color: var(--s-faint, var(--s-muted));
+  }
+
+  .site-quote figcaption b {
+    color: var(--s-ink);
+    font-weight: 600;
+  }
+
+  /* ── 01 · SWISS ─────────────────────────── */
+  [data-style="swiss"] {
+    --s-bg: #F4F4F2;
+    --s-ink: #111111;
+    --s-heading: #111111;
+    --s-muted: #55554F;
+    --s-faint: #8A8A83;
+    --s-accent: #D91E18;
+    --s-on-accent: #FFFFFF;
+    --s-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --s-body: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    --s-hair: 1px solid #111111;
+    --s-radius: 0;
+    --s-radius-pill: 0;
+    --s-h1: 3.5rem;
+    --s-h1-weight: 700;
+    --s-h1-track: -0.04em;
+    --s-h1-leading: 0.98;
+    --s-btn-pad: 13px 28px;
+    --s-btn-case: uppercase;
+    --s-btn-track: 0.08em;
+    --s-eyebrow-border: 0;
+    --s-eyebrow-bg: #D91E18;
+    --s-eyebrow-ink: #FFFFFF;
+    --s-eyebrow-pad: 5px 11px;
+    --s-nav-case: uppercase;
+    --s-nav-track: 0.09em;
+    --s-logo-case: uppercase;
+    --s-logo-track: 0.02em;
+    --s-card-border: 0;
+    --s-gap: 30px;
+    --s-h3-case: uppercase;
+    --s-h3-track: 0.04em;
+    --s-card-pad: 0;
+    --s-quote: 1.75rem;
+    --s-quote-weight: 700;
+  }
+  [data-style="swiss"] .site-card { border-top: 3px solid #111; padding-top: 14px; }
+
+  /* ── 02 · EDITORIAL ─────────────────────── */
+  [data-style="editorial"] {
+    --s-bg: #FBF8F3;
+    --s-ink: #2A2622;
+    --s-heading: #17130F;
+    --s-muted: #6B625A;
+    --s-faint: #9C9187;
+    --s-accent: #7C2D2D;
+    --s-on-accent: #FBF8F3;
+    --s-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --s-body: "Iowan Old Style", Georgia, serif;
+    --s-ui: system-ui, sans-serif;
+    --s-hair: 1px solid #DDD3C6;
+    --s-radius: 2px;
+    --s-h1: 3.6rem;
+    --s-h1-weight: 400;
+    --s-h1-leading: 1.06;
+    --s-h1-track: -0.02em;
+    --s-measure: 15ch;
+    --s-eyebrow-border: 0;
+    --s-eyebrow-pad: 0;
+    --s-eyebrow-ink: #7C2D2D;
+    --s-btn-pad: 12px 26px;
+    --s-btn-weight: 500;
+    --s-card-pad: 0;
+    --s-gap: 38px;
+    --s-h3-weight: 500;
+    --s-quote: 1.7rem;
+    --s-quote-weight: 400;
+    --s-quote-style: italic;
+    --s-hero-pad: 60px;
+  }
+  [data-style="editorial"] .site-hero h2::first-letter { color: #7C2D2D; }
+  [data-style="editorial"] .site-card { border-left: 1px solid #DDD3C6; padding-left: 20px; }
+
+  /* ── 03 · NEO-BRUTALIST ─────────────────── */
+  [data-style="brutal"] {
+    --s-bg: #FDE74C;
+    --s-ink: #0A0A0A;
+    --s-heading: #0A0A0A;
+    --s-muted: #2E2E2E;
+    --s-faint: #4A4A44;
+    --s-accent: #0A0A0A;
+    --s-on-accent: #FDE74C;
+    --s-display: "Arial Black", "Helvetica Neue", Impact, sans-serif;
+    --s-body: "Courier New", ui-monospace, monospace;
+    --s-hair: 3px solid #0A0A0A;
+    --s-radius: 0;
+    --s-radius-pill: 0;
+    --s-h1: 3.7rem;
+    --s-h1-weight: 900;
+    --s-h1-track: -0.045em;
+    --s-h1-case: uppercase;
+    --s-h1-leading: 0.92;
+    --s-measure: 13ch;
+    --s-btn-pad: 14px 26px;
+    --s-btn-border: 3px solid #0A0A0A;
+    --s-btn-shadow: 6px 6px 0 #0A0A0A;
+    --s-btn-case: uppercase;
+    --s-btn-weight: 700;
+    --s-eyebrow-bg: #0A0A0A;
+    --s-eyebrow-ink: #FDE74C;
+    --s-eyebrow-border: 0;
+    --s-eyebrow-pad: 5px 12px;
+    --s-card-bg: #FFFFFF;
+    --s-card-border: 3px solid #0A0A0A;
+    --s-card-shadow: 6px 6px 0 #0A0A0A;
+    --s-card-pad: 20px;
+    --s-h3-case: uppercase;
+    --s-h3-weight: 800;
+    --s-quote: 1.65rem;
+    --s-quote-weight: 900;
+    --s-nav-case: uppercase;
+    --s-nav-track: 0.05em;
+    --s-logo-case: uppercase;
+  }
+  [data-style="brutal"] .site-btn.ghost { background: #FFF; box-shadow: 6px 6px 0 #0A0A0A; }
+
+  /* ── 04 · DARK SAAS ─────────────────────── */
+  [data-style="saas"] {
+    --s-bg: #0C1116;
+    --s-ink: #DCE3EA;
+    --s-heading: #FFFFFF;
+    --s-muted: #8996A4;
+    --s-faint: #5F6B78;
+    --s-accent: #3DDC97;
+    --s-on-accent: #06211A;
+    --s-display: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --s-body: system-ui, -apple-system, "Segoe UI", sans-serif;
+    --s-hair: 1px solid #1E2831;
+    --s-radius: 10px;
+    --s-h1: 3.2rem;
+    --s-h1-weight: 700;
+    --s-h1-track: -0.035em;
+    --s-btn-pad: 13px 24px;
+    --s-eyebrow-border: 1px solid #24404A;
+    --s-eyebrow-bg: rgba(61, 220, 151, 0.09);
+    --s-eyebrow-ink: #3DDC97;
+    --s-card-bg: #131A21;
+    --s-card-border: 1px solid #1E2831;
+    --s-card-pad: 22px;
+    --s-quote: 1.5rem;
+    --s-quote-weight: 600;
+  }
+  [data-style="saas"] .site-hero h2 {
+    background: linear-gradient(96deg, #FFFFFF 42%, #3DDC97 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* ── 05 · TERMINAL ──────────────────────── */
+  [data-style="terminal"] {
+    --s-bg: #05100A;
+    --s-ink: #35E07A;
+    --s-heading: #7BFFAC;
+    --s-muted: #2A9757;
+    --s-faint: #1C6B3E;
+    --s-accent: #35E07A;
+    --s-on-accent: #05100A;
+    --s-display: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --s-body: ui-monospace, "Cascadia Mono", Consolas, monospace;
+    --s-hair: 1px dashed #1C6B3E;
+    --s-radius: 0;
+    --s-radius-pill: 0;
+    --s-h1: 2.5rem;
+    --s-h1-weight: 700;
+    --s-h1-track: -0.01em;
+    --s-h1-leading: 1.18;
+    --s-measure: 22ch;
+    --s-btn-pad: 11px 22px;
+    --s-btn-border: 1px solid #35E07A;
+    --s-btn-case: uppercase;
+    --s-btn-track: 0.1em;
+    --s-eyebrow-border: 1px dashed #35E07A;
+    --s-eyebrow-ink: #35E07A;
+    --s-card-border: 1px dashed #1C6B3E;
+    --s-card-pad: 18px;
+    --s-h3-case: uppercase;
+    --s-h3-track: 0.06em;
+    --s-quote: 1.15rem;
+    --s-quote-weight: 400;
+    --s-nav-case: uppercase;
+    --s-hero-pad: 44px;
+  }
+  [data-style="terminal"] .site-hero h2::after {
+    content: "_";
+    animation: blink 1.05s step-end infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+  [data-style="terminal"] .site-card .no::before { content: "> "; }
+
+  /* ── 06 · LUXURY ────────────────────────── */
+  [data-style="luxury"] {
+    --s-bg: #12100D;
+    --s-ink: #E8E2D6;
+    --s-heading: #F6F2E9;
+    --s-muted: #9A9285;
+    --s-faint: #6E6659;
+    --s-accent: #C6A45C;
+    --s-on-accent: #12100D;
+    --s-display: "Didot", "Bodoni MT", "Playfair Display", Georgia, serif;
+    --s-body: system-ui, "Helvetica Neue", sans-serif;
+    --s-hair: 1px solid #2C2823;
+    --s-radius: 0;
+    --s-radius-pill: 0;
+    --s-h1: 3.6rem;
+    --s-h1-weight: 400;
+    --s-h1-track: 0.005em;
+    --s-h1-leading: 1.1;
+    --s-measure: 14ch;
+    --s-hero-pad: 76px;
+    --s-btn-pad: 15px 34px;
+    --s-btn-case: uppercase;
+    --s-btn-track: 0.18em;
+    --s-btn-weight: 500;
+    --s-eyebrow-border: 0;
+    --s-eyebrow-pad: 0;
+    --s-eyebrow-ink: #C6A45C;
+    --s-card-pad: 0;
+    --s-gap: 44px;
+    --s-h3-weight: 400;
+    --s-h3-track: 0.02em;
+    --s-quote: 1.6rem;
+    --s-quote-weight: 400;
+    --s-quote-style: italic;
+    --s-nav-case: uppercase;
+    --s-nav-track: 0.16em;
+    --s-logo-case: uppercase;
+    --s-logo-track: 0.22em;
+    --s-logo-weight: 400;
+  }
+  [data-style="luxury"] .site-eyebrow { letter-spacing: 0.3em; }
+  [data-style="luxury"] .site-card .no { letter-spacing: 0.3em; }
+
+  /* ── 07 · MEMPHIS ───────────────────────── */
+  [data-style="memphis"] {
+    --s-bg: #FFF3F8;
+    --s-ink: #2B1B3D;
+    --s-heading: #2B1B3D;
+    --s-muted: #6A5580;
+    --s-faint: #9C8AAF;
+    --s-accent: #F0399B;
+    --s-on-accent: #FFFFFF;
+    --s-display: "Trebuchet MS", "Segoe UI", system-ui, sans-serif;
+    --s-body: "Trebuchet MS", system-ui, sans-serif;
+    --s-hair: 2px solid #FFD1E4;
+    --s-radius: 22px;
+    --s-h1: 3.3rem;
+    --s-h1-weight: 800;
+    --s-h1-track: -0.03em;
+    --s-h1-leading: 1.04;
+    --s-btn-pad: 14px 30px;
+    --s-btn-shadow: 0 8px 0 #C41F77;
+    --s-btn-weight: 700;
+    --s-eyebrow-bg: #6DD3E8;
+    --s-eyebrow-ink: #14364A;
+    --s-eyebrow-border: 0;
+    --s-eyebrow-pad: 6px 14px;
+    --s-card-bg: #FFFFFF;
+    --s-card-border: 2px solid #FFD1E4;
+    --s-card-shadow: 0 6px 0 #FFD1E4;
+    --s-card-pad: 22px;
+    --s-h3-weight: 700;
+    --s-quote: 1.55rem;
+    --s-quote-weight: 700;
+    --s-gap: 20px;
+  }
+  [data-style="memphis"] .site-card:nth-child(2) { --s-accent: #6DD3E8; }
+  [data-style="memphis"] .site-card:nth-child(3) { --s-accent: #FFB43D; }
+
+  /* ── 08 · CORPORATE ─────────────────────── */
+  [data-style="corporate"] {
+    --s-bg: #FFFFFF;
+    --s-ink: #1E2A38;
+    --s-heading: #0E1A28;
+    --s-muted: #5A6B7D;
+    --s-faint: #8B99A8;
+    --s-accent: #0B5FBA;
+    --s-on-accent: #FFFFFF;
+    --s-display: system-ui, "Segoe UI", Roboto, sans-serif;
+    --s-body: system-ui, "Segoe UI", Roboto, sans-serif;
+    --s-hair: 1px solid #E1E7ED;
+    --s-radius: 5px;
+    --s-h1: 2.9rem;
+    --s-h1-weight: 700;
+    --s-h1-track: -0.028em;
+    --s-h1-leading: 1.14;
+    --s-measure: 19ch;
+    --s-btn-pad: 12px 24px;
+    --s-eyebrow-bg: #EAF2FB;
+    --s-eyebrow-ink: #0B5FBA;
+    --s-eyebrow-border: 0;
+    --s-card-bg: #F7F9FB;
+    --s-card-border: 1px solid #E1E7ED;
+    --s-card-pad: 22px;
+    --s-quote: 1.4rem;
+    --s-quote-weight: 600;
+    --s-hero-pad: 46px;
+  }
+</style>
+<style>
+  body { margin:0; }
+  .sheet { padding: 26px 26px 30px; }
+  .sheet-hd { display:flex; align-items:flex-end; justify-content:space-between;
+    gap:20px; border-bottom:2px solid var(--ink); padding-bottom:12px; margin-bottom:18px; }
+  .sheet-hd h1 { margin:0; font-size:1.9rem; letter-spacing:-0.03em; }
+  .sheet-hd h1 em { font-style:normal; color:var(--blue); }
+  .sheet-hd p { margin:4px 0 0; color:var(--ink-muted); font-size:0.78rem; max-width:60ch; }
+  .sheet-hd .tag { font-size:0.68rem; text-transform:uppercase; letter-spacing:0.1em;
+    color:var(--ink); border:1px solid var(--marker); background:rgba(232,185,49,0.16);
+    padding:4px 9px; white-space:nowrap; }
+  .grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+  .cell { margin:0; }
+  .frame { position:relative; border:1px solid var(--rule); overflow:hidden;
+    aspect-ratio: 4 / 3.05; background:var(--surface); container-type:inline-size; }
+  .frame .site { position:absolute; top:0; left:0; width:1180px;
+    transform:scale(0.243); transform-origin:top left; --pad:34px; }
+  .cell figcaption { display:flex; justify-content:space-between; padding-top:6px;
+    font-size:0.7rem; text-transform:uppercase; letter-spacing:0.07em; color:var(--ink-muted); }
+  .cell:nth-child(1) figcaption::after { content:"01"; }
+  .cell:nth-child(2) figcaption::after { content:"02"; }
+  .cell:nth-child(3) figcaption::after { content:"03"; }
+  .cell:nth-child(4) figcaption::after { content:"04"; }
+  .cell:nth-child(5) figcaption::after { content:"05"; }
+  .cell:nth-child(6) figcaption::after { content:"06"; }
+  .cell:nth-child(7) figcaption::after { content:"07"; }
+  .cell:nth-child(8) figcaption::after { content:"08"; }
+  .cell figcaption::after { color:var(--ink-faint); font-variant-numeric:tabular-nums; }
+  .sheet-ft { margin-top:16px; padding-top:10px; border-top:1px solid var(--rule);
+    display:flex; flex-wrap:wrap; gap:6px 26px; font-size:0.7rem; color:var(--ink-faint); }
+  .sheet-ft b { color:var(--ink-muted); font-weight:600; }
+</style>
+</head><body>
+<div class="sheet">
+  <header class="sheet-hd">
+    <div>
+      <h1>Style Engine — <em>one brief, eight websites</em></h1>
+      <p>Every frame below renders the identical <code>content.json</code>. Only the token set changes —
+         type, scale, colour, border, radius, shadow, rhythm. That is why site #2 costs a fraction of site #1.</p>
+    </div>
+    <span class="tag">Demo · fictional brand</span>
+  </header>
+  <div class="grid">
+<figure class="cell"><div class="frame"><div class="site" data-style="swiss">
+
+          <nav class="site-nav">
+            <span class="site-logo">Loop&thinsp;&amp;&thinsp;Refer</span>
+            <span class="site-links">
+              <span>How it works</span><span>Pricing</span><span>Case studies</span><span>Log in</span>
+            </span>
+          </nav>
+
+          <div class="site-hero">
+            <span class="site-eyebrow">Referral engine</span>
+            <h2>Your best salespeople don't work here.</h2>
+            <p>
+              They're the customers who already recommend you at dinner. Loop &amp; Refer turns
+              that into a tracked, paid, repeatable channel — without asking your team to chase
+              a single spreadsheet.
+            </p>
+            <div class="site-cta">
+              <span class="site-btn">Start free trial</span>
+              <span class="site-btn ghost">Book a walkthrough</span>
+              <span class="site-proof">No card required · 14 days · Cancel in one click</span>
+            </div>
+          </div>
+
+          <div class="site-grid">
+            <div class="site-card">
+              <span class="no">01</span>
+              <h3>Launch in an afternoon</h3>
+              <p>Drop in one script tag. Rewards, tracking links and fraud checks are already wired up.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">02</span>
+              <h3>Pay only on results</h3>
+              <p>Rewards fire when the referred customer actually converts — never on a click.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">03</span>
+              <h3>See the whole loop</h3>
+              <p>Every referral traced from the first share to the invoice it turned into.</p>
+            </div>
+          </div>
+
+          <figure class="site-quote">
+            <blockquote>&ldquo;Referrals went from a thing we hoped for to a line in the forecast.&rdquo;</blockquote>
+            <figcaption><b>Dana Reyes</b> · Head of Growth, Northwind Studio <em>(illustrative)</em></figcaption>
+          </figure>
+</div></div><figcaption>Swiss Grid</figcaption></figure>
+<figure class="cell"><div class="frame"><div class="site" data-style="editorial">
+
+          <nav class="site-nav">
+            <span class="site-logo">Loop&thinsp;&amp;&thinsp;Refer</span>
+            <span class="site-links">
+              <span>How it works</span><span>Pricing</span><span>Case studies</span><span>Log in</span>
+            </span>
+          </nav>
+
+          <div class="site-hero">
+            <span class="site-eyebrow">Referral engine</span>
+            <h2>Your best salespeople don't work here.</h2>
+            <p>
+              They're the customers who already recommend you at dinner. Loop &amp; Refer turns
+              that into a tracked, paid, repeatable channel — without asking your team to chase
+              a single spreadsheet.
+            </p>
+            <div class="site-cta">
+              <span class="site-btn">Start free trial</span>
+              <span class="site-btn ghost">Book a walkthrough</span>
+              <span class="site-proof">No card required · 14 days · Cancel in one click</span>
+            </div>
+          </div>
+
+          <div class="site-grid">
+            <div class="site-card">
+              <span class="no">01</span>
+              <h3>Launch in an afternoon</h3>
+              <p>Drop in one script tag. Rewards, tracking links and fraud checks are already wired up.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">02</span>
+              <h3>Pay only on results</h3>
+              <p>Rewards fire when the referred customer actually converts — never on a click.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">03</span>
+              <h3>See the whole loop</h3>
+              <p>Every referral traced from the first share to the invoice it turned into.</p>
+            </div>
+          </div>
+
+          <figure class="site-quote">
+            <blockquote>&ldquo;Referrals went from a thing we hoped for to a line in the forecast.&rdquo;</blockquote>
+            <figcaption><b>Dana Reyes</b> · Head of Growth, Northwind Studio <em>(illustrative)</em></figcaption>
+          </figure>
+</div></div><figcaption>Editorial</figcaption></figure>
+<figure class="cell"><div class="frame"><div class="site" data-style="brutal">
+
+          <nav class="site-nav">
+            <span class="site-logo">Loop&thinsp;&amp;&thinsp;Refer</span>
+            <span class="site-links">
+              <span>How it works</span><span>Pricing</span><span>Case studies</span><span>Log in</span>
+            </span>
+          </nav>
+
+          <div class="site-hero">
+            <span class="site-eyebrow">Referral engine</span>
+            <h2>Your best salespeople don't work here.</h2>
+            <p>
+              They're the customers who already recommend you at dinner. Loop &amp; Refer turns
+              that into a tracked, paid, repeatable channel — without asking your team to chase
+              a single spreadsheet.
+            </p>
+            <div class="site-cta">
+              <span class="site-btn">Start free trial</span>
+              <span class="site-btn ghost">Book a walkthrough</span>
+              <span class="site-proof">No card required · 14 days · Cancel in one click</span>
+            </div>
+          </div>
+
+          <div class="site-grid">
+            <div class="site-card">
+              <span class="no">01</span>
+              <h3>Launch in an afternoon</h3>
+              <p>Drop in one script tag. Rewards, tracking links and fraud checks are already wired up.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">02</span>
+              <h3>Pay only on results</h3>
+              <p>Rewards fire when the referred customer actually converts — never on a click.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">03</span>
+              <h3>See the whole loop</h3>
+              <p>Every referral traced from the first share to the invoice it turned into.</p>
+            </div>
+          </div>
+
+          <figure class="site-quote">
+            <blockquote>&ldquo;Referrals went from a thing we hoped for to a line in the forecast.&rdquo;</blockquote>
+            <figcaption><b>Dana Reyes</b> · Head of Growth, Northwind Studio <em>(illustrative)</em></figcaption>
+          </figure>
+</div></div><figcaption>Neo-Brutalist</figcaption></figure>
+<figure class="cell"><div class="frame"><div class="site" data-style="saas">
+
+          <nav class="site-nav">
+            <span class="site-logo">Loop&thinsp;&amp;&thinsp;Refer</span>
+            <span class="site-links">
+              <span>How it works</span><span>Pricing</span><span>Case studies</span><span>Log in</span>
+            </span>
+          </nav>
+
+          <div class="site-hero">
+            <span class="site-eyebrow">Referral engine</span>
+            <h2>Your best salespeople don't work here.</h2>
+            <p>
+              They're the customers who already recommend you at dinner. Loop &amp; Refer turns
+              that into a tracked, paid, repeatable channel — without asking your team to chase
+              a single spreadsheet.
+            </p>
+            <div class="site-cta">
+              <span class="site-btn">Start free trial</span>
+              <span class="site-btn ghost">Book a walkthrough</span>
+              <span class="site-proof">No card required · 14 days · Cancel in one click</span>
+            </div>
+          </div>
+
+          <div class="site-grid">
+            <div class="site-card">
+              <span class="no">01</span>
+              <h3>Launch in an afternoon</h3>
+              <p>Drop in one script tag. Rewards, tracking links and fraud checks are already wired up.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">02</span>
+              <h3>Pay only on results</h3>
+              <p>Rewards fire when the referred customer actually converts — never on a click.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">03</span>
+              <h3>See the whole loop</h3>
+              <p>Every referral traced from the first share to the invoice it turned into.</p>
+            </div>
+          </div>
+
+          <figure class="site-quote">
+            <blockquote>&ldquo;Referrals went from a thing we hoped for to a line in the forecast.&rdquo;</blockquote>
+            <figcaption><b>Dana Reyes</b> · Head of Growth, Northwind Studio <em>(illustrative)</em></figcaption>
+          </figure>
+</div></div><figcaption>Dark SaaS</figcaption></figure>
+<figure class="cell"><div class="frame"><div class="site" data-style="terminal">
+
+          <nav class="site-nav">
+            <span class="site-logo">Loop&thinsp;&amp;&thinsp;Refer</span>
+            <span class="site-links">
+              <span>How it works</span><span>Pricing</span><span>Case studies</span><span>Log in</span>
+            </span>
+          </nav>
+
+          <div class="site-hero">
+            <span class="site-eyebrow">Referral engine</span>
+            <h2>Your best salespeople don't work here.</h2>
+            <p>
+              They're the customers who already recommend you at dinner. Loop &amp; Refer turns
+              that into a tracked, paid, repeatable channel — without asking your team to chase
+              a single spreadsheet.
+            </p>
+            <div class="site-cta">
+              <span class="site-btn">Start free trial</span>
+              <span class="site-btn ghost">Book a walkthrough</span>
+              <span class="site-proof">No card required · 14 days · Cancel in one click</span>
+            </div>
+          </div>
+
+          <div class="site-grid">
+            <div class="site-card">
+              <span class="no">01</span>
+              <h3>Launch in an afternoon</h3>
+              <p>Drop in one script tag. Rewards, tracking links and fraud checks are already wired up.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">02</span>
+              <h3>Pay only on results</h3>
+              <p>Rewards fire when the referred customer actually converts — never on a click.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">03</span>
+              <h3>See the whole loop</h3>
+              <p>Every referral traced from the first share to the invoice it turned into.</p>
+            </div>
+          </div>
+
+          <figure class="site-quote">
+            <blockquote>&ldquo;Referrals went from a thing we hoped for to a line in the forecast.&rdquo;</blockquote>
+            <figcaption><b>Dana Reyes</b> · Head of Growth, Northwind Studio <em>(illustrative)</em></figcaption>
+          </figure>
+</div></div><figcaption>Terminal</figcaption></figure>
+<figure class="cell"><div class="frame"><div class="site" data-style="luxury">
+
+          <nav class="site-nav">
+            <span class="site-logo">Loop&thinsp;&amp;&thinsp;Refer</span>
+            <span class="site-links">
+              <span>How it works</span><span>Pricing</span><span>Case studies</span><span>Log in</span>
+            </span>
+          </nav>
+
+          <div class="site-hero">
+            <span class="site-eyebrow">Referral engine</span>
+            <h2>Your best salespeople don't work here.</h2>
+            <p>
+              They're the customers who already recommend you at dinner. Loop &amp; Refer turns
+              that into a tracked, paid, repeatable channel — without asking your team to chase
+              a single spreadsheet.
+            </p>
+            <div class="site-cta">
+              <span class="site-btn">Start free trial</span>
+              <span class="site-btn ghost">Book a walkthrough</span>
+              <span class="site-proof">No card required · 14 days · Cancel in one click</span>
+            </div>
+          </div>
+
+          <div class="site-grid">
+            <div class="site-card">
+              <span class="no">01</span>
+              <h3>Launch in an afternoon</h3>
+              <p>Drop in one script tag. Rewards, tracking links and fraud checks are already wired up.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">02</span>
+              <h3>Pay only on results</h3>
+              <p>Rewards fire when the referred customer actually converts — never on a click.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">03</span>
+              <h3>See the whole loop</h3>
+              <p>Every referral traced from the first share to the invoice it turned into.</p>
+            </div>
+          </div>
+
+          <figure class="site-quote">
+            <blockquote>&ldquo;Referrals went from a thing we hoped for to a line in the forecast.&rdquo;</blockquote>
+            <figcaption><b>Dana Reyes</b> · Head of Growth, Northwind Studio <em>(illustrative)</em></figcaption>
+          </figure>
+</div></div><figcaption>Luxury</figcaption></figure>
+<figure class="cell"><div class="frame"><div class="site" data-style="memphis">
+
+          <nav class="site-nav">
+            <span class="site-logo">Loop&thinsp;&amp;&thinsp;Refer</span>
+            <span class="site-links">
+              <span>How it works</span><span>Pricing</span><span>Case studies</span><span>Log in</span>
+            </span>
+          </nav>
+
+          <div class="site-hero">
+            <span class="site-eyebrow">Referral engine</span>
+            <h2>Your best salespeople don't work here.</h2>
+            <p>
+              They're the customers who already recommend you at dinner. Loop &amp; Refer turns
+              that into a tracked, paid, repeatable channel — without asking your team to chase
+              a single spreadsheet.
+            </p>
+            <div class="site-cta">
+              <span class="site-btn">Start free trial</span>
+              <span class="site-btn ghost">Book a walkthrough</span>
+              <span class="site-proof">No card required · 14 days · Cancel in one click</span>
+            </div>
+          </div>
+
+          <div class="site-grid">
+            <div class="site-card">
+              <span class="no">01</span>
+              <h3>Launch in an afternoon</h3>
+              <p>Drop in one script tag. Rewards, tracking links and fraud checks are already wired up.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">02</span>
+              <h3>Pay only on results</h3>
+              <p>Rewards fire when the referred customer actually converts — never on a click.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">03</span>
+              <h3>See the whole loop</h3>
+              <p>Every referral traced from the first share to the invoice it turned into.</p>
+            </div>
+          </div>
+
+          <figure class="site-quote">
+            <blockquote>&ldquo;Referrals went from a thing we hoped for to a line in the forecast.&rdquo;</blockquote>
+            <figcaption><b>Dana Reyes</b> · Head of Growth, Northwind Studio <em>(illustrative)</em></figcaption>
+          </figure>
+</div></div><figcaption>Memphis</figcaption></figure>
+<figure class="cell"><div class="frame"><div class="site" data-style="corporate">
+
+          <nav class="site-nav">
+            <span class="site-logo">Loop&thinsp;&amp;&thinsp;Refer</span>
+            <span class="site-links">
+              <span>How it works</span><span>Pricing</span><span>Case studies</span><span>Log in</span>
+            </span>
+          </nav>
+
+          <div class="site-hero">
+            <span class="site-eyebrow">Referral engine</span>
+            <h2>Your best salespeople don't work here.</h2>
+            <p>
+              They're the customers who already recommend you at dinner. Loop &amp; Refer turns
+              that into a tracked, paid, repeatable channel — without asking your team to chase
+              a single spreadsheet.
+            </p>
+            <div class="site-cta">
+              <span class="site-btn">Start free trial</span>
+              <span class="site-btn ghost">Book a walkthrough</span>
+              <span class="site-proof">No card required · 14 days · Cancel in one click</span>
+            </div>
+          </div>
+
+          <div class="site-grid">
+            <div class="site-card">
+              <span class="no">01</span>
+              <h3>Launch in an afternoon</h3>
+              <p>Drop in one script tag. Rewards, tracking links and fraud checks are already wired up.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">02</span>
+              <h3>Pay only on results</h3>
+              <p>Rewards fire when the referred customer actually converts — never on a click.</p>
+            </div>
+            <div class="site-card">
+              <span class="no">03</span>
+              <h3>See the whole loop</h3>
+              <p>Every referral traced from the first share to the invoice it turned into.</p>
+            </div>
+          </div>
+
+          <figure class="site-quote">
+            <blockquote>&ldquo;Referrals went from a thing we hoped for to a line in the forecast.&rdquo;</blockquote>
+            <figcaption><b>Dana Reyes</b> · Head of Growth, Northwind Studio <em>(illustrative)</em></figcaption>
+          </figure>
+</div></div><figcaption>Corporate</figcaption></figure>
+  </div>
+  <div class="sheet-ft">
+    <span><b>Built with</b> Claude Code</span>
+    <span><b>Stack</b> One HTML file · CSS custom properties · no framework</span>
+    <span><b>Content</b> Synthetic; testimonial illustrative</span>
+  </div>
+</div>
+</body></html>
